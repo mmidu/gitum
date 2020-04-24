@@ -72,7 +72,7 @@ func main() {
 		identifier = os.Args[1]
 	}
 
-	jsonFile, err := os.Open("_credentials.json")
+	jsonFile, err := os.Open("credentials.json")
 
 	check(err)
 
