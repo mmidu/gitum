@@ -72,7 +72,7 @@ func main() {
 		identifier = os.Args[1]
 	}
 
-	jsonFile, err := os.Open("credentials.json")
+	jsonFile, err := os.Open(fmt.Sprintf("%s/git-credentials.json", getHomeDir()))
 
 	check(err)
 
