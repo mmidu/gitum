@@ -60,16 +60,35 @@ func getHomeDir() string {
 	return cuser.HomeDir
 }
 
-func main() {
+func initialize() {
+	fmt.Println("initialize")
+}
+
+func manageArguments() string {
 	var identifier string
+	for i := 0; i < len(os.Args); i++ {
+		switch os.Args[i] {
+		case "init":
+			initialize()
+		case "-u", "--user":
+			if i+1 < len(os.Args) {
+				identifier = os.Args[i+1]
+			}
+		case "-h", "--help":
+			fmt.Println("HELP STRING")
+		}
+	}
+	return identifier
+}
+
+func main() {
 	var currentUser User
+	var identifier string
 
 	filePath := fmt.Sprintf("%s/.git-credentials", getHomeDir())
-	hasArg := len(os.Args) > 1
 
-	if hasArg {
-		identifier = os.Args[1]
-	}
+	identifier = manageArguments()
+	fmt.Println(identifier)
 
 	jsonFile, err := os.Open(fmt.Sprintf("%s/git-credentials.json", getHomeDir()))
 
