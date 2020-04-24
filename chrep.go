@@ -1,6 +1,7 @@
 package main
 
 import (
+	"bufio"
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
@@ -44,32 +45,36 @@ type User struct {
 type Credentials struct {
 	Username string `json:"username"`
 	Password string `json:"password"`
+	Domain   string `json:"domain"`
+}
+
+func check(e error) {
+	if e != nil {
+		panic(e)
+	}
 }
 
 func getHomeDir() string {
 	cuser, err := user.Current()
-	if err != nil {
-		panic(err)
-	}
+	check(err)
 	return cuser.HomeDir
 }
 
 func main() {
+	var identifier string
+	var currentUser User
 
 	filePath := fmt.Sprintf("%s/.git-credentials", getHomeDir())
 	fmt.Println(filePath)
 	hasArg := len(os.Args) > 1
-	var identifier string
 
 	if hasArg {
 		identifier = os.Args[1]
 	}
 
-	jsonFile, err := os.Open("credentials.json")
+	jsonFile, err := os.Open("_credentials.json")
 
-	if err != nil {
-		fmt.Println(err)
-	}
+	check(err)
 
 	var users Users
 
@@ -82,13 +87,23 @@ func main() {
 	if identifier != "" {
 		exists := users.Contains(identifier)
 		if exists {
-			currentUser := users.Get(identifier)
-			fmt.Println(currentUser)
+			currentUser = users.Get(identifier)
 		} else {
-			fmt.Println(fmt.Sprintf("%s: credentials do not exist", identifier))
+			panic(fmt.Sprintf("%s: credentials do not exist", identifier))
 		}
 	} else {
-		currentUser := users.Users[0]
-		fmt.Println(currentUser)
+		currentUser = users.Users[0]
 	}
+
+	credentials := fmt.Sprintf("https://%s:%s@%s", currentUser.Credentials.Username, currentUser.Credentials.Password, currentUser.Credentials.Domain)
+	fmt.Println(credentials)
+
+	file, err := os.Create(filePath)
+	check(err)
+	defer file.Close()
+
+	w := bufio.NewWriter(file)
+	_, err = w.WriteString(credentials)
+	check(err)
+	w.Flush()
 }
