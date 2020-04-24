@@ -61,16 +61,23 @@ func getHomeDir() string {
 }
 
 func initialize() {
-	fmt.Println("initialize")
+	file, err := os.Create(fmt.Sprintf("%s/git-credentials.json", getHomeDir()))
+	check(err)
+	defer file.Close()
+
+	w := bufio.NewWriter(file)
+	_, err = w.WriteString(JSONStub)
+	check(err)
+	w.Flush()
 }
 
 func manageArguments() string {
 	var identifier string
 	for i := 0; i < len(os.Args); i++ {
 		switch os.Args[i] {
-		case "init":
+		case "-i", "--init":
 			initialize()
-		case "-u", "--user":
+		case "-ui", "--userIdentifier":
 			if i+1 < len(os.Args) {
 				identifier = os.Args[i+1]
 			}
@@ -81,46 +88,68 @@ func manageArguments() string {
 	return identifier
 }
 
+func fileExists(filename string) bool {
+	info, err := os.Stat(filename)
+	if os.IsNotExist(err) {
+		return false
+	}
+	return !info.IsDir()
+}
+
+// JSONStub is the default json structure of the git-credentials.json file
+const JSONStub = "{\n\t\"users\": [\n\t\t{\n\t\t\t\"identifier\": \"github-work\",\n\t\t\t\"credentials\": {\n\t\t\t\t\"username\": \"username\",\n\t\t\t\t\"password\": \"password1\",\n\t\t\t\t\"domain\": \"github.com\"\n\t\t\t}\n\t\t},\n\t\t{\n\t\t\t\"identifier\": \"two\",\n\t\t\t\"credentials\": {\n\t\t\t\t\"username\": \"uname2\",\n\t\t\t\t\"password\": \"password2\",\n\t\t\t\t\"domain\": \"domain\"\n\t\t\t}\n\t\t}\n\t]\n}"
+
 func main() {
-	var currentUser User
+
 	var identifier string
 
-	filePath := fmt.Sprintf("%s/.git-credentials", getHomeDir())
-
 	identifier = manageArguments()
-	fmt.Println(identifier)
 
-	jsonFile, err := os.Open(fmt.Sprintf("%s/git-credentials.json", getHomeDir()))
+	credentialsPath := fmt.Sprintf("%s/git-credentials.json", getHomeDir())
 
-	check(err)
+	if fileExists(credentialsPath) {
 
-	var users Users
+		var currentUser User
 
-	defer jsonFile.Close()
+		filePath := fmt.Sprintf("%s/.git-credentials", getHomeDir())
 
-	byteValue, _ := ioutil.ReadAll(jsonFile)
+		jsonFile, err := os.Open(fmt.Sprintf("%s/git-credentials.json", getHomeDir()))
 
-	json.Unmarshal(byteValue, &users)
+		check(err)
 
-	if identifier != "" {
-		exists := users.Contains(identifier)
-		if exists {
-			currentUser = users.Get(identifier)
+		var users Users
+
+		defer jsonFile.Close()
+
+		byteValue, _ := ioutil.ReadAll(jsonFile)
+
+		json.Unmarshal(byteValue, &users)
+
+		if identifier != "" {
+			exists := users.Contains(identifier)
+			if exists {
+				currentUser = users.Get(identifier)
+			} else {
+				fmt.Println(fmt.Sprintf("%s: credentials do not exist", identifier))
+				return
+			}
 		} else {
-			panic(fmt.Sprintf("%s: credentials do not exist", identifier))
+			fmt.Println("User identifier not defined.\nDefine it with the -ui (--userIdentifier) flag.")
+			return
 		}
+
+		credentials := fmt.Sprintf("https://%s:%s@%s\n", currentUser.Credentials.Username, currentUser.Credentials.Password, currentUser.Credentials.Domain)
+
+		file, err := os.Create(filePath)
+		check(err)
+		defer file.Close()
+
+		w := bufio.NewWriter(file)
+		_, err = w.WriteString(credentials)
+		check(err)
+		w.Flush()
 	} else {
-		currentUser = users.Users[0]
+		fmt.Println("git-credentials.json file does not exists.\nGenerate it with the -i (--init) flag.")
+		return
 	}
-
-	credentials := fmt.Sprintf("https://%s:%s@%s\n", currentUser.Credentials.Username, currentUser.Credentials.Password, currentUser.Credentials.Domain)
-
-	file, err := os.Create(filePath)
-	check(err)
-	defer file.Close()
-
-	w := bufio.NewWriter(file)
-	_, err = w.WriteString(credentials)
-	check(err)
-	w.Flush()
 }
