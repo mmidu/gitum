@@ -65,7 +65,6 @@ func main() {
 	var currentUser User
 
 	filePath := fmt.Sprintf("%s/.git-credentials", getHomeDir())
-	fmt.Println(filePath)
 	hasArg := len(os.Args) > 1
 
 	if hasArg {
@@ -95,8 +94,7 @@ func main() {
 		currentUser = users.Users[0]
 	}
 
-	credentials := fmt.Sprintf("https://%s:%s@%s", currentUser.Credentials.Username, currentUser.Credentials.Password, currentUser.Credentials.Domain)
-	fmt.Println(credentials)
+	credentials := fmt.Sprintf("https://%s:%s@%s\n", currentUser.Credentials.Username, currentUser.Credentials.Password, currentUser.Credentials.Domain)
 
 	file, err := os.Create(filePath)
 	check(err)
