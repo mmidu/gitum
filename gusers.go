@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
+	"net/url"
 	"os"
 	"os/user"
 )
@@ -77,7 +78,7 @@ func manageArguments() string {
 		switch os.Args[i] {
 		case "-i", "--init":
 			initialize()
-		case "-ui", "--userIdentifier":
+		case "-s", "--set":
 			if i+1 < len(os.Args) {
 				identifier = os.Args[i+1]
 			}
@@ -134,11 +135,11 @@ func main() {
 				return
 			}
 		} else {
-			fmt.Println("User identifier not defined.\nDefine it with the -ui (--userIdentifier) flag.")
+			fmt.Println("User identifier not set.\nDefine it with the -s (--set) flag.")
 			return
 		}
 
-		credentials := fmt.Sprintf("https://%s:%s@%s\n", currentUser.Credentials.Username, currentUser.Credentials.Password, currentUser.Credentials.Domain)
+		credentials := fmt.Sprintf("https://%s:%s@%s\n", url.QueryEscape(currentUser.Credentials.Username), url.QueryEscape(currentUser.Credentials.Password), currentUser.Credentials.Domain)
 
 		file, err := os.Create(filePath)
 		check(err)
@@ -148,6 +149,7 @@ func main() {
 		_, err = w.WriteString(credentials)
 		check(err)
 		w.Flush()
+		fmt.Println(credentials)
 	} else {
 		fmt.Println("git-credentials.json file does not exists.\nGenerate it with the -i (--init) flag.")
 		return
