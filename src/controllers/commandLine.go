@@ -16,14 +16,21 @@ const JSONStub = "{\n\t\"users\": [\n\t\t{\n\t\t\t\"identifier\": \"github-work\
 
 // Init initializes the JSON stub file
 func Init() {
-	file, err := os.Create(fmt.Sprintf("%s/git-credentials.json", utils.GetHomeDir()))
-	utils.Check(err)
-	defer file.Close()
+	path := fmt.Sprintf("%s/git-credentials.json", utils.GetHomeDir())
+	if !utils.FileExists(path) {
+		file, err := os.Create(path)
+		utils.Check(err)
+		defer file.Close()
 
-	w := bufio.NewWriter(file)
-	_, err = w.WriteString(JSONStub)
-	utils.Check(err)
-	w.Flush()
+		w := bufio.NewWriter(file)
+		_, err = w.WriteString(JSONStub)
+		utils.Check(err)
+		w.Flush()
+	} else {
+		fmt.Println(fmt.Sprintf("%s/git-credentials.json file already exists.", utils.GetHomeDir()))
+	}
+
+	os.Exit(0)
 }
 
 // ManageArguments get arguments from the command line and executes the right functions
@@ -39,8 +46,11 @@ func ManageArguments() string {
 			}
 		case "-lu", "--listUsers":
 			printCredentials()
+		case "-c", "--current":
+			getCurrent()
 		case "-h", "--help":
 			fmt.Println("HELP STRING")
+			os.Exit(0)
 		}
 	}
 	return identifier
@@ -58,6 +68,19 @@ func printCredentials() {
 	json.Unmarshal(byteValue, &users)
 
 	fmt.Println(users.List())
+
+	os.Exit(0)
+}
+
+func getCurrent() {
+	credentialsFile, err := os.Open(fmt.Sprintf("%s/.git-credentials", utils.GetHomeDir()))
+	utils.Check(err)
+	defer credentialsFile.Close()
+
+	reader := bufio.NewReader(credentialsFile)
+	data, err := reader.ReadString('\n')
+	utils.Check(err)
+	fmt.Printf(string(data))
 
 	os.Exit(0)
 }
