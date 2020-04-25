@@ -21,19 +21,19 @@ func ManageArguments() string {
 	var identifier string
 	for i := 0; i < len(os.Args); i++ {
 		switch os.Args[i] {
-		case "-i", "init":
+		case "i", "init":
 			Init()
-		case "-s", "set":
+		case "s", "set":
 			if i+1 < len(os.Args) {
 				identifier = os.Args[i+1]
 			}
-		case "-ul", "uxList":
+		case "ul", "uxList":
 			printCredentials()
-		case "-c", "current":
+		case "c", "current":
 			current()
-		case "-ui", "uxImport":
+		case "ui", "uxImport":
 			importUser()
-		case "-h", "help":
+		case "h", "help":
 			fmt.Println("HELP STRING")
 			os.Exit(0)
 		}
