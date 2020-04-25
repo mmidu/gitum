@@ -5,7 +5,9 @@ import (
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
+	"net/url"
 	"os"
+	"strings"
 
 	"../models"
 	"../utils"
@@ -57,6 +59,14 @@ func ManageArguments() string {
 }
 
 func printCredentials() {
+	users := getCredentials()
+
+	fmt.Println(users.List())
+
+	os.Exit(0)
+}
+
+func getCredentials() models.Users {
 	jsonFile, err := os.Open(fmt.Sprintf("%s/git-credentials.json", utils.GetHomeDir()))
 	utils.Check(err)
 	defer jsonFile.Close()
@@ -67,9 +77,7 @@ func printCredentials() {
 
 	json.Unmarshal(byteValue, &users)
 
-	fmt.Println(users.List())
-
-	os.Exit(0)
+	return users
 }
 
 func getCurrent() {
@@ -80,7 +88,27 @@ func getCurrent() {
 	reader := bufio.NewReader(credentialsFile)
 	data, err := reader.ReadString('\n')
 	utils.Check(err)
-	fmt.Printf(string(data))
 
-	os.Exit(0)
+	fl := data[8:]
+
+	resA := strings.SplitN(fl, ":", -1)
+
+	username := resA[0]
+
+	resB := strings.SplitN(resA[1], "@", -1)
+
+	password, _ := url.QueryUnescape(resB[0])
+
+	domain := strings.TrimSuffix(resB[1], "\n")
+
+	users := getCredentials()
+
+	for _, user := range users.Users {
+		if user.Credentials.Username == username && user.Credentials.Password == password && user.Credentials.Domain == domain {
+			fmt.Println(user.Identifier)
+			os.Exit(0)
+		}
+	}
+
+	os.Exit(1)
 }
