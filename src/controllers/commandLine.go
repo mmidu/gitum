@@ -2,9 +2,12 @@ package controllers
 
 import (
 	"bufio"
+	"encoding/json"
 	"fmt"
+	"io/ioutil"
 	"os"
 
+	"../models"
 	"../utils"
 )
 
@@ -34,9 +37,27 @@ func ManageArguments() string {
 			if i+1 < len(os.Args) {
 				identifier = os.Args[i+1]
 			}
+		case "-lu", "--listUsers":
+			printCredentials()
 		case "-h", "--help":
 			fmt.Println("HELP STRING")
 		}
 	}
 	return identifier
+}
+
+func printCredentials() {
+	jsonFile, err := os.Open(fmt.Sprintf("%s/git-credentials.json", utils.GetHomeDir()))
+	utils.Check(err)
+	defer jsonFile.Close()
+
+	var users models.Users
+
+	byteValue, _ := ioutil.ReadAll(jsonFile)
+
+	json.Unmarshal(byteValue, &users)
+
+	fmt.Println(users.List())
+
+	os.Exit(0)
 }

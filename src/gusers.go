@@ -31,9 +31,9 @@ func main() {
 
 		utils.Check(err)
 
-		var users models.Users
-
 		defer jsonFile.Close()
+
+		var users models.Users
 
 		byteValue, _ := ioutil.ReadAll(jsonFile)
 

@@ -26,6 +26,15 @@ func (u Users) Get(identifier string) User {
 	return user
 }
 
+// List lists the available identifiers
+func (u Users) List() []string {
+	var list []string
+	for _, user := range u.Users {
+		list = append(list, user.Identifier)
+	}
+	return list
+}
+
 // User is the strict that holds the user data
 type User struct {
 	Identifier  string      `json:"identifier"`
