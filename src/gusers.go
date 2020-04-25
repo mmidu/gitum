@@ -62,7 +62,6 @@ func main() {
 		_, err = w.WriteString(credentials)
 		utils.Check(err)
 		w.Flush()
-		fmt.Println(credentials)
 	} else {
 		fmt.Println("git-credentials.json file does not exists.\nGenerate it with the -i (--init) flag.")
 		return
