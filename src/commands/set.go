@@ -73,6 +73,7 @@ func ExecSet() {
 		_, err = w.WriteString(credentials)
 		utils.Check(err)
 		w.Flush()
+		os.Exit(0)
 	} else {
 		fmt.Println("git-credentials.json file does not exists.\nGenerate it with the i (init) command.")
 		os.Exit(0)
