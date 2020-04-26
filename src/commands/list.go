@@ -26,7 +26,7 @@ func ExecList() {
 
 		fmt.Println(users.List())
 	} else {
-		fmt.Println("git-credentials.json file does not exists.\nGenerate it with the -i (--init) flag.")
+		fmt.Println("git-credentials.json file does not exists.\nGenerate it with the i (init) command.")
 	}
 	os.Exit(0)
 

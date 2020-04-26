@@ -59,7 +59,7 @@ func ExecSet() {
 				os.Exit(0)
 			}
 		} else {
-			fmt.Println("User identifier not set.\nDefine it with the -s (--set) flag.")
+			fmt.Println("User identifier not set.\nDefine it with the s (set) command.")
 			os.Exit(0)
 		}
 
@@ -74,7 +74,7 @@ func ExecSet() {
 		utils.Check(err)
 		w.Flush()
 	} else {
-		fmt.Println("git-credentials.json file does not exists.\nGenerate it with the -i (--init) flag.")
+		fmt.Println("git-credentials.json file does not exists.\nGenerate it with the i (init) command.")
 		os.Exit(0)
 	}
 }

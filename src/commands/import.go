@@ -10,7 +10,7 @@ import (
 	"../utils"
 )
 
-var importInvocation = []string{"iu", "import"}
+var importInvocation = []string{"ui", "import"}
 
 var importDescription = "Imports the currently active user in the git-credentials.json file, if it is not already registered."
 
@@ -52,7 +52,7 @@ func ExecImport() {
 		utils.WriteStringInFile(fmt.Sprintf("%s/git-credentials.json", utils.GetHomeDir()), string(JSONData))
 		os.Exit(0)
 	} else {
-		fmt.Println("git-credentials.json file does not exists.\nGenerate it with the -i (--init) flag.")
+		fmt.Println("git-credentials.json file does not exists.\nGenerate it with the i (init) command.")
 	}
 	os.Exit(0)
 }
