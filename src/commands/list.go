@@ -17,7 +17,6 @@ var ListCommand = models.NewCommand(ExecList, listDescription, listInvocation)
 
 // ExecList prints the available credentials
 func ExecList() {
-	fmt.Println("list executed")
 
 	credentialsPath := fmt.Sprintf("%s/git-credentials.json", utils.GetHomeDir())
 

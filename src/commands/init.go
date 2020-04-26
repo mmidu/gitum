@@ -18,7 +18,6 @@ var InitCommand = models.NewCommand(ExecInit, initDescription, initInvocation)
 
 // ExecInit executes the init command
 func ExecInit() {
-	fmt.Println("init executed")
 
 	path := fmt.Sprintf("%s/git-credentials.json", utils.GetHomeDir())
 	if !utils.FileExists(path) {

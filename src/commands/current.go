@@ -17,7 +17,6 @@ var CurrentCommand = models.NewCommand(ExecCurrent, currentDescription, currentI
 
 // ExecCurrent handles the current user command
 func ExecCurrent() {
-	fmt.Println("current executed")
 
 	users := utils.GetCredentials()
 	currentUser := utils.GetCurrentUser()

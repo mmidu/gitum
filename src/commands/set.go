@@ -22,7 +22,6 @@ var SetCommand = models.NewCommand(ExecSet, setDescription, setInvocation)
 
 // ExecSet sets the new user
 func ExecSet() {
-	fmt.Println("set executed")
 
 	var identifier string
 	i := 1

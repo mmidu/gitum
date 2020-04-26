@@ -19,7 +19,6 @@ var ImportCommand = models.NewCommand(ExecImport, importDescription, importInvoc
 
 // ExecImport imports an existing user
 func ExecImport() {
-	fmt.Println("import executed")
 
 	credentialsPath := fmt.Sprintf("%s/git-credentials.json", utils.GetHomeDir())
 
