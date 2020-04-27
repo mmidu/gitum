@@ -1,8 +1,6 @@
 package commands
 
 import (
-	"os"
-
 	"../app/models"
 )
 
@@ -29,5 +27,4 @@ func ExecHelp() {
 		command.PrintHelper()
 	}
 	help.PrintHelper()
-	os.Exit(0)
 }

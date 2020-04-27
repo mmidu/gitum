@@ -32,11 +32,10 @@ func (router Router) Route() {
 		cmd := router.Keys[firstArg]
 		if cmd != "" {
 			routes.Map[cmd].Function()
+			return
 		}
 		fmt.Println(fmt.Sprintf("%s: command does not exist.", cmd))
-		os.Exit(0)
 	}
-	os.Exit(0)
 }
 
 // AppRouter generates the app router

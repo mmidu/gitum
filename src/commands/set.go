@@ -55,11 +55,11 @@ func ExecSet() {
 				currentUser = users.Get(identifier)
 			} else {
 				fmt.Println(fmt.Sprintf("%s: credentials do not exist", identifier))
-				os.Exit(0)
+				return
 			}
 		} else {
 			fmt.Println("User identifier not set.\nDefine it with the s (set) command.")
-			os.Exit(0)
+			return
 		}
 
 		credentials := fmt.Sprintf("https://%s:%s@%s\n", url.QueryEscape(currentUser.Credentials.Username), url.QueryEscape(currentUser.Credentials.Password), currentUser.Credentials.Domain)
@@ -72,9 +72,7 @@ func ExecSet() {
 		_, err = w.WriteString(credentials)
 		utils.Check(err)
 		w.Flush()
-		os.Exit(0)
-	} else {
-		fmt.Println("git-credentials.json file does not exists.\nGenerate it with the i (init) command.")
-		os.Exit(0)
+		return
 	}
+	fmt.Println("git-credentials.json file does not exists.\nGenerate it with the i (init) command.")
 }

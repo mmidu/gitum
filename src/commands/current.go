@@ -2,7 +2,6 @@ package commands
 
 import (
 	"fmt"
-	"os"
 
 	"../app/models"
 	"../utils"
@@ -26,9 +25,6 @@ func ExecCurrent() {
 			user.Credentials.Password == currentUser["password"] &&
 			user.Credentials.Domain == currentUser["domain"] {
 			fmt.Println(user.Identifier)
-			os.Exit(0)
 		}
 	}
-
-	os.Exit(0)
 }

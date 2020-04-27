@@ -2,7 +2,6 @@ package commands
 
 import (
 	"fmt"
-	"os"
 
 	"../app/models"
 	"../utils"
@@ -24,9 +23,7 @@ func ExecList() {
 		users := utils.GetCredentials()
 
 		fmt.Println(users.List())
-	} else {
-		fmt.Println("git-credentials.json file does not exists.\nGenerate it with the i (init) command.")
+		return
 	}
-	os.Exit(0)
-
+	fmt.Println("git-credentials.json file does not exists.\nGenerate it with the i (init) command.")
 }

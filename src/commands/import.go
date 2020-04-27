@@ -3,7 +3,6 @@ package commands
 import (
 	"encoding/json"
 	"fmt"
-	"os"
 	"strings"
 
 	"../app/models"
@@ -30,7 +29,7 @@ func ExecImport() {
 			if user.Credentials.Username == currentUser["username"] &&
 				user.Credentials.Password == currentUser["password"] &&
 				user.Credentials.Domain == currentUser["domain"] {
-				os.Exit(0)
+				return
 			}
 		}
 
@@ -49,9 +48,7 @@ func ExecImport() {
 
 		JSONData, _ := json.MarshalIndent(data, "", "    ")
 		utils.WriteStringInFile(fmt.Sprintf("%s/git-credentials.json", utils.GetHomeDir()), string(JSONData))
-		os.Exit(0)
-	} else {
-		fmt.Println("git-credentials.json file does not exists.\nGenerate it with the i (init) command.")
+		return
 	}
-	os.Exit(0)
+	fmt.Println("git-credentials.json file does not exists.\nGenerate it with the i (init) command.")
 }

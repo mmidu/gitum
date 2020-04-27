@@ -2,7 +2,6 @@ package commands
 
 import (
 	"fmt"
-	"os"
 
 	"../app/models"
 	"../data"
@@ -22,9 +21,8 @@ func ExecInit() {
 	path := fmt.Sprintf("%s/git-credentials.json", utils.GetHomeDir())
 	if !utils.FileExists(path) {
 		utils.WriteStringInFile(path, data.GitCredentialsJSONStub)
-	} else {
-		fmt.Println(fmt.Sprintf("%s/git-credentials.json file already exists.", utils.GetHomeDir()))
+		return
 	}
 
-	os.Exit(0)
+	fmt.Println(fmt.Sprintf("%s/git-credentials.json file already exists.", utils.GetHomeDir()))
 }
