@@ -11,6 +11,9 @@
 	<p>
 		GitUM currently supports Ubuntu, and is under development in order to add useful functionalities and support to diverse systems.
 	</p>
+	<p>
+		You can easily install GitUM with this command <?php echo "test"; ?>
+	</p>
 </body>
 
 </html>
