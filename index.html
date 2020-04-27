@@ -17,7 +17,7 @@
 			overflow-x: hidden;
 			overflow-x: scroll;
 			color: #3f3f3f;
-			line-height: 1em;
+			line-height: 1.2em;
 		}
 		h1{
 			font-weight: 200;
@@ -49,7 +49,18 @@
 		.container{
 			padding:10vh 20vw;
 		}
+		.section{
+			padding:2em;
+			margin: 2em;
+			background-color: #f5f5f5;
+			border-radius: 4px;
+		}
 
+		@media only screen and (max-width : 767px) {
+			.container{
+				padding:10vh 1em;
+			}
+		}	
 	</style>
 </head>
 
@@ -57,65 +68,68 @@
 	<div class="container">
 		<h1>Git<strong>UM</strong></h1>
 		<h2>Git User Manager</h2>
-		<p>
-			Git<strong>UM</strong> is a user management tool for <a href="https://git-scm.com/" target="_blank">Git</a>.
-		</p>
-		<p>
-			It can be used to manage your local git users.
-		</p>
-		<p>
-			Thanks to Git<strong>UM</strong> You can add users to the user manager and easily switch between them with simple commands.
-		</p>
-		<p>
-			Git<strong>UM</strong> is currently under development.
-			As for now, it's tested on <a href="https://www.ubuntu-it.org/" target="_blank">Ubuntu</a>.
-		</p>
-		<p>
-			We hope we can get to add useful functionalities and support to diverse systems real soon!
-		</p>
-		<p>
-			You can easily install Git<strong>UM</strong> with these two commands in your console:
-		</p>
-		<p>
-			<code>
-				sudo wget -O /usr/local/bin/gitum https://github.com/mmidu/gitum/raw/master/build/gitum
-			</code>
-			<code>
-				sudo chmod +x /usr/local/bin/gitum
-			</code>
-		</p>
-		<p>
-			You can even make it a one-liner &#128540;
-		</p>
-		<p>
-			<code>
-				sudo wget -O /usr/local/bin/gitum https://github.com/mmidu/gitum/raw/master/build/gitum && sudo chmod +x /usr/local/bin/gitum
-			</code>
-		</p>
-		<p>
-			Using Git<strong>UM</strong> is really easy.
-			You can initialize Git<strong>UM</strong>. This will also import the currently active local Git user, it's as simple as that: 
-			<code>gitum init</code>
-			After that, you can add users to Git<strong>UM</strong>, you can check the current user
-			<code>gitum current</code>
-			list the available users
-			<code>gitum list</code>
-			and set one of them as active
-			<code>gitum set <strong>username</strong></code>
-			replacing <strong style="font-family: monospace; vertical-align: top;">username</strong> with the user identifier.
-			if you enable a different git user, not stored in Git<strong>UM</strong>, you can import it
-			<code>gitum import</code>
-			If you need any, you can ask for help
-			<code>gitum help</code>
-			there, you can also learn the short version of these commands.
-		</p>
-		<p>
-			Git<strong>UM</strong> is an open source project, hosted <a class="cta" href="https://github.com/mmidu/gitum" target="_blank">here</a>.
-		</p>
-		<p>
-			Say hi <a class="cta" href="mailto:mmiduri.job@gmail.com" target="_blank">here</a>!
-		</p>
-
+		<div class="section">
+			<p>
+				Git<strong>UM</strong> is a user management tool for <a href="https://git-scm.com/" target="_blank">Git</a>.
+			</p>
+			<p>
+				It can be used to manage your local git users.
+			</p>
+			<p>
+				Thanks to Git<strong>UM</strong> You can add users to the user manager and easily switch between them with simple commands.
+			</p>
+			<p>
+				Git<strong>UM</strong> is currently under development.
+				As for now, it's tested on <a href="https://www.ubuntu-it.org/" target="_blank">Ubuntu</a>.
+			</p>
+			<p>
+				We hope we can get to add useful functionalities and support to diverse systems real soon!
+			</p>
+			<p>
+				You can easily install Git<strong>UM</strong> with these two commands in your console:
+			</p>
+			<p>
+				<code>
+					sudo wget -O /usr/local/bin/gitum https://github.com/mmidu/gitum/raw/master/build/gitum
+				</code>
+				<code>
+					sudo chmod +x /usr/local/bin/gitum
+				</code>
+			</p>
+			<p>
+				You can even make it a one-liner &#128540;
+			</p>
+			<p>
+				<code>
+					sudo wget -O /usr/local/bin/gitum https://github.com/mmidu/gitum/raw/master/build/gitum && sudo chmod +x /usr/local/bin/gitum
+				</code>
+			</p>
+		</div>
+		<div class="section">
+			<p>
+				Using Git<strong>UM</strong> is really easy.<br><br>
+				First of all, you can initialize it. This will also import the currently active local Git user, it's as simple as that: 
+				<code>gitum init</code>
+				After that, you can add users to Git<strong>UM</strong>, you can check the current user
+				<code>gitum current</code>
+				list the available users
+				<code>gitum list</code>
+				and set one of them as active
+				<code>gitum set <strong>username</strong></code>
+				replacing <strong style="font-family: monospace; vertical-align: top;">username</strong> with the user identifier.
+				if you enable a different git user, not stored in Git<strong>UM</strong>, you can import it
+				<code>gitum import</code>
+				If you need any, you can ask for help
+				<code>gitum help</code>
+				there, you can also learn the short version of these commands.
+			</p>
+			<p>
+				Git<strong>UM</strong> is an open source project, hosted <a class="cta" href="https://github.com/mmidu/gitum" target="_blank">here</a>.
+			</p>
+			<p>
+				Get in touch <a class="cta" href="mailto:mmiduri.job@gmail.com" target="_blank">here</a> to say hi!
+			</p>
+		</div>
 	</div>
 </body>
 
