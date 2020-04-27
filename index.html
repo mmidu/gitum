@@ -9,13 +9,15 @@
 			font-family: 'Roboto', sans-serif;
 			margin: 0;
 			padding: 0;
-			background: linear-gradient(#FDFFFC, #F5EE9E);
+			background: #FDFFFC/* #F5EE9E);*/
 			height: 100%;
 			width: 100vw;
 			text-align: justify;
 			font-weight: 200;
 			overflow-x: hidden;
 			overflow-x: scroll;
+			color: #3f3f3f;
+			line-height: 1em;
 		}
 		h1{
 			font-weight: 200;
@@ -92,24 +94,26 @@
 		</p>
 		<p>
 			Using Git<strong>UM</strong> is really easy.
-		</p>
-			You can initialize Git<strong>UM</strong> and import the currently active local Git user, it's as simple as that: 
-			<code>gitum init && gitum import</code>
-		</p>
-		<p>
+			You can initialize Git<strong>UM</strong>. This will also import the currently active local Git user, it's as simple as that: 
+			<code>gitum init</code>
 			After that, you can add users to Git<strong>UM</strong>, you can check the current user
 			<code>gitum current</code>
 			list the available users
 			<code>gitum list</code>
 			and set one of them as active
 			<code>gitum set <strong>username</strong></code>
-			replacing <strong style="font-family: monospace">username</strong> with the user identifier.
+			replacing <strong style="font-family: monospace; vertical-align: top;">username</strong> with the user identifier.
+			if you enable a different git user, not stored in Git<strong>UM</strong>, you can import it
+			<code>gitum import</code>
+			If you need any, you can ask for help
+			<code>gitum help</code>
+			there, you can also learn the short version of these commands.
 		</p>
 		<p>
 			Git<strong>UM</strong> is an open source project, hosted <a class="cta" href="https://github.com/mmidu/gitum" target="_blank">here</a>.
 		</p>
 		<p>
-			Write me <a class="cta" href="mailto:mmiduri.job@gmail.com" target="_blank">here</a> to say hi!
+			Say hi <a class="cta" href="mailto:mmiduri.job@gmail.com" target="_blank">here</a>!
 		</p>
 
 	</div>
