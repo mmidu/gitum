@@ -1,43 +1,80 @@
 <!DOCTYPE HTML>
 <html>
 <head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>GitUM - Git User Manager</title>
+	<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
 	<style>
-		@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap');
-
 		body{
 			font-family: 'Roboto', sans-serif;
 			margin: 0;
 			padding: 0;
+			background: linear-gradient(#FDFFFC, #F5EE9E);
+			height: 100%;
+			width: 100vw;
+			text-align: justify;
+			font-weight: 200;
+			overflow-x: hidden;
+			overflow-x: scroll;
 		}
-
+		h1{
+			font-weight: 200;
+		}
+		h1, h2{
+			text-align: center;
+		}
 		code {
 			display: block;
-			margin: 1.5em 1em;
+			margin: 1.5em 0;
 			border: 1px solid grey;
 			border-radius: 2px;
 			padding: 1em;
-			background-color: rgba(128,255,0,0.5);
+			background-color: #aff27a;
 			box-shadow: 5px 5px #c0c0c0;
+			overflow: scroll;
+			text-align: center;
+		}
+		a, a:visited, .cta, .cta:visited{
+			text-decoration: none;
+			color: #246EB9;
+		}
+		a:hover, .cta:hover{
+			color: #F06543;
+		}
+		.cta:hover{
+			font-weight: 400;
+		}
+		.container{
+			padding:10vh 20vw;
 		}
 
-		.container{
-			margin:10vh 20vw;
-		}
 	</style>
 </head>
 
 <body>
 	<div class="container">
-		<h1>GitUM - Git User Manager</h1>
+		<h1>Git<strong>UM</strong></h1>
+		<h2>Git User Manager</h2>
 		<p>
-			GitUM is a git user experience tool. It can be useful to manage your local git users. You can add users to the user manager and easily switch between them with one simple command.
+			Git<strong>UM</strong> is a user management tool for <a href="https://git-scm.com/" target="_blank">Git</a>.
 		</p>
 		<p>
-			GitUM currently supports Ubuntu, and is under development in order to add useful functionalities and support to diverse systems.
+			It can be used to manage your local git users.
 		</p>
 		<p>
-			You can easily install GitUM with these two commands in your console:
+			Thanks to Git<strong>UM</strong> You can add users to the user manager and easily switch between them with simple commands.
+		</p>
+		<p>
+			Git<strong>UM</strong> is currently under development.
+			As for now, it's tested on <a href="https://www.ubuntu-it.org/" target="_blank">Ubuntu</a>.
+		</p>
+		<p>
+			We hope we can get to add useful functionalities and support to diverse systems real soon!
+		</p>
+		<p>
+			You can easily install Git<strong>UM</strong> with these two commands in your console:
+		</p>
+		<p>
 			<code>
 				sudo wget -O /usr/local/bin/gitum https://github.com/mmidu/gitum/raw/master/build/gitum
 			</code>
@@ -45,6 +82,36 @@
 				sudo chmod +x /usr/local/bin/gitum
 			</code>
 		</p>
+		<p>
+			You can even make it a one-liner &#128540;
+		</p>
+		<p>
+			<code>
+				sudo wget -O /usr/local/bin/gitum https://github.com/mmidu/gitum/raw/master/build/gitum && sudo chmod +x /usr/local/bin/gitum
+			</code>
+		</p>
+		<p>
+			Using Git<strong>UM</strong> is really easy.
+		</p>
+			You can initialize Git<strong>UM</strong> and import the currently active local Git user, it's as simple as that: 
+			<code>gitum init && gitum import</code>
+		</p>
+		<p>
+			After that, you can add users to Git<strong>UM</strong>, you can check the current user
+			<code>gitum current</code>
+			list the available users
+			<code>gitum list</code>
+			and set one of them as active
+			<code>gitum set <strong>username</strong></code>
+			replacing <strong style="font-family: monospace">username</strong> with the user identifier.
+		</p>
+		<p>
+			Git<strong>UM</strong> is an open source project, hosted <a class="cta" href="https://github.com/mmidu/gitum" target="_blank">here</a>.
+		</p>
+		<p>
+			Write me <a class="cta" href="mailto:mmiduri.job@gmail.com" target="_blank">here</a> to say hi!
+		</p>
+
 	</div>
 </body>
 
