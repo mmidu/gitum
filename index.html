@@ -1,28 +1,51 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-<title>GitUM - Git User Manager</title>
+	<title>GitUM - Git User Manager</title>
+	<style>
+		@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap');
+
+		body{
+			font-family: 'Roboto', sans-serif;
+			margin: 0;
+			padding: 0;
+		}
+
+		code {
+			display: block;
+			margin: 1.5em 1em;
+			border: 1px solid grey;
+			border-radius: 2px;
+			padding: 1em;
+			background-color: rgba(128,255,0,0.5);
+			box-shadow: 5px 5px #c0c0c0;
+		}
+
+		.container{
+			margin:10vh 20vw;
+		}
+	</style>
 </head>
 
 <body>
-	<h1>GitUM - Git User Manager</h1>
-	<p>
-		GitUM is a git user experience tool. It can be useful to manage your local git users. You can add users to the user manager and easily switch between them with one simple command.
-	</p>
-	<p>
-		GitUM currently supports Ubuntu, and is under development in order to add useful functionalities and support to diverse systems.
-	</p>
-	<p>
-		You can easily install GitUM with these two commands in your console:
-		<label for="first_command">1.</label>
-		<code id="first_command">
-			sudo wget -O /usr/local/bin/gitum https://github.com/mmidu/gitum/raw/master/build/gitum
-		</code>
-		<label for="second_command">2.</label>
-		<code id="second_command">
-			sudo chmod +x /usr/local/bin/gitum
-		</code>
-	</p>
+	<div class="container">
+		<h1>GitUM - Git User Manager</h1>
+		<p>
+			GitUM is a git user experience tool. It can be useful to manage your local git users. You can add users to the user manager and easily switch between them with one simple command.
+		</p>
+		<p>
+			GitUM currently supports Ubuntu, and is under development in order to add useful functionalities and support to diverse systems.
+		</p>
+		<p>
+			You can easily install GitUM with these two commands in your console:
+			<code>
+				sudo wget -O /usr/local/bin/gitum https://github.com/mmidu/gitum/raw/master/build/gitum
+			</code>
+			<code>
+				sudo chmod +x /usr/local/bin/gitum
+			</code>
+		</p>
+	</div>
 </body>
 
 </html>
