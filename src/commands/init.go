@@ -21,6 +21,7 @@ func ExecInit() {
 	path := fmt.Sprintf("%s/git-credentials.json", utils.GetHomeDir())
 	if !utils.FileExists(path) {
 		utils.WriteStringInFile(path, data.GitCredentialsJSONStub)
+		ExecImport()
 		return
 	}
 
