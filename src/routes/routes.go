@@ -25,6 +25,12 @@ var List = map[string]string{
 
 	"h":    "help",
 	"help": "help",
+
+	"a":   "add",
+	"add": "add",
+
+	"r":      "remove",
+	"remove": "remove",
 }
 
 // Map holds the commands values and functionalities
@@ -35,4 +41,6 @@ var Map = map[string]*models.Command{
 	"current": commands.CurrentCommand,
 	"list":    commands.ListCommand,
 	"set":     commands.SetCommand,
+	"add":     commands.AddCommand,
+	"remove":  commands.RemoveCommand,
 }
