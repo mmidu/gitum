@@ -18,6 +18,8 @@ var commands = map[string]*models.Command{
 	"current": CurrentCommand,
 	"list":    ListCommand,
 	"set":     SetCommand,
+	"add":     AddCommand,
+	"remove":  RemoveCommand,
 }
 
 // ExecHelp prints the helper text
